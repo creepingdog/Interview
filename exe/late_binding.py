@@ -1,6 +1,6 @@
 # Actually the difference shown below involves several concepts:
 # 1. Closure
-# 2. List/Tuple comprehensive
+# 2. Generator
 # 3. Late binding
 
 
