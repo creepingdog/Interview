@@ -10,7 +10,7 @@ class Student:
     #
 
     def describe(self):
-        self.description = 'My name is {} and my student id is {}'.format(
+        self.description = 'My name is {} and my student id is {}.'.format(
             self.lname+','+self.fname, self.sid
         )
         print(self.description+'\n')
@@ -32,11 +32,6 @@ class Student:
 #
 
 
-s1 = Student('FFU000001', 'Joan', 'Wang')  # An instance of Student
-print('s1 is {} instance of Student.'.format('an' if isinstance(s1, Student) else 'not an'))
-s1.describe()
-
-
 class Grad(Student):
     def __init__(self, sid, fname=None, lname=None, subject=None):
         super().__init__(sid=sid, fname=fname, lname=lname)
@@ -49,7 +44,7 @@ class Grad(Student):
 
     def describe(self):
         if self.subject is None:
-            self.description = 'My name is {} and my student id is {}. I have not started my research yet'.format(
+            self.description = 'My name is {} and my student id is {}. I have not started my research yet.'.format(
                 self.lname + ',' + self.fname, self.sid
             )
         else:
@@ -62,14 +57,24 @@ class Grad(Student):
 #
 
 
-s2 = Grad('SMG000001', 'Jason', 'Zhang')        # An instance of Grad
-print('s2 is {} instance of Grad.'.format('an' if isinstance(s2, Grad) else 'not an'))
-s2.describe()
+if __name__ == '__main__':
+    s1 = Student('FFU000001', 'Joan', 'Wang')  # An instance of Student
+    print("s1 = Student('FFU000001', 'Joan', 'Wang')")
+    print('s1 is {} instance of Student.'.format('an' if isinstance(s1, Student) else 'not an'))
+    s1.describe()
 
-s3 = Grad.randomize_id_static('Andrew', 'Lee')  # An instance of Student because of static method
-print('s3 is {} instance of Grad.'.format('an' if isinstance(s3, Grad) else 'not an'))
-s3.describe()
+    s2 = Grad('SMG000001', 'Jason', 'Zhang')        # An instance of Grad
+    print("s2 = Grad('SMG000001', 'Jason', 'Zhang')")
+    print('s2 is {} instance of Grad.'.format('an' if isinstance(s2, Grad) else 'not an'))
+    s2.describe()
 
-s4 = Grad.randomize_id_class('Angela', 'Cheng') # An instance of Grad
-print('s4 is {} instance of Grad.'.format('an' if isinstance(s4, Grad) else 'not an'))
-s4.describe()
+    s3 = Grad.randomize_id_static('Andrew', 'Lee')  # An instance of Student because of static method
+    print("s3 = Grad.randomize_id_static('Andrew', 'Lee')")
+    print('s3 is {} instance of Grad.'.format('an' if isinstance(s3, Grad) else 'not an'))
+    s3.describe()
+
+    s4 = Grad.randomize_id_class('Angela', 'Cheng') # An instance of Grad
+    print("s4 = Grad.randomize_id_class('Angela', 'Cheng')")
+    print('s4 is {} instance of Grad.'.format('an' if isinstance(s4, Grad) else 'not an'))
+    s4.describe()
+#
