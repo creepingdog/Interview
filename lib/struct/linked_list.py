@@ -56,6 +56,20 @@ class LinkedList(object):
         #
     #
 
+    def add(self, data):
+        node = Node(data)
+        head = self.__head
+        if head is None:
+            self.set_head(node)
+        else:
+            curr = head
+            while curr.get_next():
+                curr = curr.get_next()
+            #
+            curr.set_next(node)
+        #
+    #
+
     def reverse(self):
         prev_node = None
         curr_node = self.__head

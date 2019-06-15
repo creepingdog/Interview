@@ -14,6 +14,12 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(str(linked_list), 'This -> is -> a -> linked -> list -> [END]')
     #
 
+    def test_add(self):
+        linked_list = ll.LinkedList([-3.4, 'check', 78, None])
+        linked_list.add('new')
+        self.assertEqual(str(linked_list), '-3.4 -> check -> 78 -> None -> new -> [END]')
+    #
+
     def test_reverse(self):
         linked_list = ll.LinkedList([4, 9, -1, 7, 2])
         linked_list.reverse()
