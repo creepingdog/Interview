@@ -1,4 +1,6 @@
 import collections
+import sys
+import io
 
 
 class Node(object):
@@ -74,6 +76,10 @@ class BiTree(object):
         self.__root = root
     #
 
+    def get_root(self):
+        return self.__root
+    #
+
     def build(self, iterable):
         if iterable is None:
             return None
@@ -89,7 +95,7 @@ class BiTree(object):
 
     def display(self):
         print()
-        root = self.__root
+        root = self.get_root()
 
         if not root:
             return
@@ -105,6 +111,54 @@ class BiTree(object):
         #
     #
 
-    # def __repr__(self, prefix, is_tail):
-    #     layout =
+    @staticmethod
+    def _is_same_tree(n1, n2):
+        if not n1 and not n2:
+            return True
+        elif n1 and n2:
+            return n1.get_data() == n2.get_data() and \
+                   BiTree._is_same_tree(n1.get_left(), n2.get_left()) and \
+                   BiTree._is_same_tree(n1.get_right(), n2.get_right())
+        else:
+            return False
+        #
+    #
+
+    def __eq__(self, other):
+        return BiTree._is_same_tree(self.get_root(), other.get_root())
+    #
+
+    def breadth_traversal(self, out=sys.stdout):
+        stack = [(self.get_root(), 0)]
+
+        while stack:
+            (node, level) = stack.pop(0)
+            out.write('{}({}) -> '.format(node.get_data(), level))
+
+            left = node.get_left()
+            if left:
+                stack.append((left, level+1))
+            #
+            right = node.get_right()
+            if right:
+                stack.append((right, level + 1))
+            #
+        #
+        out.write('[END]')
+    #
+
+    @staticmethod
+    def _deep_traversal(node, parent_node=None, out=sys.stdout):
+        if not node:
+            return
+        #
+        out.write('{}({}) -> '.format(node.get_data(), parent_node.get_data() if parent_node else 'ROOT'))
+        BiTree._deep_traversal(node.get_left(), parent_node=node, out=out)
+        BiTree._deep_traversal(node.get_right(), parent_node=node, out=out)
+    #
+
+    def deep_traversal(self, out=sys.stdout):
+        self._deep_traversal(self.get_root(), out=out)
+        out.write('[END]')
+    #
 #
