@@ -26,6 +26,20 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(str(linked_list), '2 -> 7 -> -1 -> 9 -> 4 -> [END]')
     #
 
+    def test_swap_pairs(self):
+        linked_list = ll.LinkedList(('This', 'is', 'a', 'linked', 'list'))
+        linked_list.swap_pairs()
+        self.assertEqual(str(linked_list), 'is -> This -> linked -> a -> list -> [END]')
+
+        linked_list = ll.LinkedList([-5, 9.4])
+        linked_list.swap_pairs()
+        self.assertEqual(str(linked_list), '9.4 -> -5 -> [END]')
+
+        linked_list = ll.LinkedList([4, 9, -1, 7, 2, 10.5])
+        linked_list.swap_pairs()
+        self.assertEqual(str(linked_list), '9 -> 4 -> 7 -> -1 -> 10.5 -> 2 -> [END]')
+    #
+
 
 if __name__ == '__main__':
     unittest.main()
