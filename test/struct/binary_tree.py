@@ -22,16 +22,6 @@ class TestLinkedList(unittest.TestCase):
         self.assertNotEqual(t1, t3)
     #
 
-    def test_deep_traversal(self):
-        out = io.StringIO()
-        btree = bt.BiTree([4, [9, [2, [5, None, None], [3, None, None]], ['test', None, None]],
-                        [8, [100.3, None, None], [-5.0, None, None]]])
-        btree.deep_traversal(out=out)
-        ret = out.getvalue()
-        out.close()
-        self.assertEqual(ret, '4(ROOT) -> 9(4) -> 2(9) -> 5(2) -> 3(2) -> test(9) -> 8(4) -> 100.3(8) -> -5.0(8) -> [END]')
-    #
-
     def test_breath_traversal(self):
         out = io.StringIO()
         btree = bt.BiTree([4, [9, [2, [5, None, None], [3, None, None]], ['test', None, None]],
@@ -40,6 +30,36 @@ class TestLinkedList(unittest.TestCase):
         ret = out.getvalue()
         out.close()
         self.assertEqual(ret, '4(0) -> 9(1) -> 8(1) -> 2(2) -> test(2) -> 100.3(2) -> -5.0(2) -> 5(3) -> 3(3) -> [END]')
+    #
+
+    def test_preorder_traversal(self):
+        out = io.StringIO()
+        btree = bt.BiTree([4, [9, [2, [5, None, None], [3, None, None]], ['test', None, None]],
+                        [8, [100.3, None, None], [-5.0, None, None]]])
+        btree.preorder_traversal(out=out)
+        ret = out.getvalue()
+        out.close()
+        self.assertEqual(ret, '4(ROOT) -> 9(4) -> 2(9) -> 5(2) -> 3(2) -> test(9) -> 8(4) -> 100.3(8) -> -5.0(8) -> [END]')
+    #
+
+    def test_inorder_traversal(self):
+        out = io.StringIO()
+        btree = bt.BiTree([4, [9, [2, [5, None, None], [3, None, None]], ['test', None, None]],
+                        [8, [100.3, None, None], [-5.0, None, None]]])
+        btree.inorder_traversal(out=out)
+        ret = out.getvalue()
+        out.close()
+        self.assertEqual(ret, '5(2) -> 2(9) -> 3(2) -> 9(4) -> test(9) -> 4(ROOT) -> 100.3(8) -> 8(4) -> -5.0(8) -> [END]')
+    #
+
+    def test_postorder_traversal(self):
+        out = io.StringIO()
+        btree = bt.BiTree([4, [9, [2, [5, None, None], [3, None, None]], ['test', None, None]],
+                        [8, [100.3, None, None], [-5.0, None, None]]])
+        btree.postorder_traversal(out=out)
+        ret = out.getvalue()
+        out.close()
+        self.assertEqual(ret, '-5.0(8) -> 100.3(8) -> 8(4) -> test(9) -> 3(2) -> 5(2) -> 2(9) -> 9(4) -> 4(ROOT) -> [END]')
     #
 #
 

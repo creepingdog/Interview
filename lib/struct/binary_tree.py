@@ -148,17 +148,47 @@ class BiTree(object):
     #
 
     @staticmethod
-    def _deep_traversal(node, parent_node=None, out=sys.stdout):
+    def _preorder_traversal(node, parent_node=None, out=sys.stdout):
         if not node:
             return
         #
         out.write('{}({}) -> '.format(node.get_data(), parent_node.get_data() if parent_node else 'ROOT'))
-        BiTree._deep_traversal(node.get_left(), parent_node=node, out=out)
-        BiTree._deep_traversal(node.get_right(), parent_node=node, out=out)
+        BiTree._preorder_traversal(node.get_left(), parent_node=node, out=out)
+        BiTree._preorder_traversal(node.get_right(), parent_node=node, out=out)
     #
 
-    def deep_traversal(self, out=sys.stdout):
-        self._deep_traversal(self.get_root(), out=out)
+    @staticmethod
+    def _inorder_traversal(node, parent_node=None, out=sys.stdout):
+        if not node:
+            return
+        #
+        BiTree._inorder_traversal(node.get_left(), parent_node=node, out=out)
+        out.write('{}({}) -> '.format(node.get_data(), parent_node.get_data() if parent_node else 'ROOT'))
+        BiTree._inorder_traversal(node.get_right(), parent_node=node, out=out)
+    #
+
+    @staticmethod
+    def _postorder_traversal(node, parent_node=None, out=sys.stdout):
+        if not node:
+            return
+        #
+        BiTree._postorder_traversal(node.get_right(), parent_node=node, out=out)
+        BiTree._postorder_traversal(node.get_left(), parent_node=node, out=out)
+        out.write('{}({}) -> '.format(node.get_data(), parent_node.get_data() if parent_node else 'ROOT'))
+    #
+
+    def preorder_traversal(self, out=sys.stdout):
+        self._preorder_traversal(self.get_root(), out=out)
+        out.write('[END]')
+    #
+
+    def inorder_traversal(self, out=sys.stdout):
+        self._inorder_traversal(self.get_root(), out=out)
+        out.write('[END]')
+    #
+
+    def postorder_traversal(self, out=sys.stdout):
+        self._postorder_traversal(self.get_root(), out=out)
         out.write('[END]')
     #
 #
