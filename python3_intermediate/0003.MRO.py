@@ -33,6 +33,11 @@ if __name__ == '__main__':
     print('G.mro(): {}'.format(G.mro()))
     print('G.__mro__: {}'.format(G.__mro__))
 
+    print('\nUnlike .mro() or .__mro__, __bases__ only shows direct parent classes:')
+    print('G.__bases__: {}'.format(G.__bases__))
+    print('A.__bases__: {}'.format(A.__bases__))
+
+    print('\nInheritance uses MRO C3 to get the first hit:')
     g = G()
     g.say_hello()
 #
